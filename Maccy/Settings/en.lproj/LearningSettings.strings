@@ -1,0 +1,16 @@
+"Title" = "Learning";
+"Description" = "AI translations are saved here as original and translated text pairs for studying.";
+"Original" = "Original";
+"Translation" = "Translation";
+"CopyDate" = "Copy date JSON";
+"CopyDateSuccess" = "Copied date JSON to the clipboard.";
+"CopyDateFailure" = "Could not copy date JSON to the clipboard: %@";
+"CopyDateEncodingFailure" = "JSON encoding failed.";
+"CopyDatePasteboardFailure" = "Clipboard write failed.";
+"DeleteDate" = "Delete date";
+"DeleteAll" = "Delete all";
+"DeleteAllConfirm" = "Delete all";
+"DeleteAllConfirmationTitle" = "Delete all learning history?";
+"DeleteAllConfirmationMessage" = "This removes all saved AI translation study records. Normal clipboard history is not affected.";
+"EmptyTitle" = "No learning history yet";
+"EmptyDescription" = "Future successful AI translations will appear here after DeepSeek translation is enabled.";

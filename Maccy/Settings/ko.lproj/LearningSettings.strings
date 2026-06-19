@@ -1,0 +1,16 @@
+"Title" = "학습";
+"Description" = "AI가 번역한 내용을 원문과 번역문 세트로 저장해서 공부할 수 있습니다.";
+"Original" = "원문";
+"Translation" = "번역문";
+"CopyDate" = "이 날짜 JSON 복사";
+"CopyDateSuccess" = "이 날짜의 JSON을 클립보드에 복사했습니다.";
+"CopyDateFailure" = "이 날짜의 JSON을 클립보드에 복사하지 못했습니다: %@";
+"CopyDateEncodingFailure" = "JSON 인코딩에 실패했습니다.";
+"CopyDatePasteboardFailure" = "클립보드 쓰기에 실패했습니다.";
+"DeleteDate" = "이 날짜 삭제";
+"DeleteAll" = "전체 삭제";
+"DeleteAllConfirm" = "전체 삭제";
+"DeleteAllConfirmationTitle" = "학습 기록을 모두 삭제할까요?";
+"DeleteAllConfirmationMessage" = "저장된 AI 번역 학습 기록만 모두 삭제합니다. 일반 클립보드 히스토리는 영향을 받지 않습니다.";
+"EmptyTitle" = "아직 학습 기록이 없습니다";
+"EmptyDescription" = "DeepSeek 번역을 켠 뒤 AI 번역이 성공하면 앞으로의 기록이 여기에 표시됩니다.";
