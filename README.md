@@ -1,169 +1,73 @@
+# Maccy 영어공부 버전
 
-<img width="128px" src="https://maccy.app/img/maccy/Logo.png" alt="Logo" />
+macOS 클립보드 매니저인 [Maccy](https://github.com/p0deje/Maccy)를 영어공부용으로 조금 개조한 버전입니다.
 
-# [Maccy](https://maccy.app)
+문장을 복사하면 원문은 그대로 두고, 번역문을 Maccy 히스토리에 함께 추가합니다.
 
-[![Downloads](https://img.shields.io/github/downloads/p0deje/Maccy/total.svg)](https://github.com/p0deje/Maccy/releases/latest)
-[![Build Status](https://img.shields.io/bitrise/716921b669780314/master?token=3pMiCb5dpFzlO-7jTYtO3Q)](https://app.bitrise.io/app/716921b669780314)
+## 원본 프로젝트
 
-Maccy is a lightweight clipboard manager for macOS. It keeps the history of what you copy
-and lets you quickly navigate, search, and use previous clipboard contents.
+- 원본: [p0deje/Maccy](https://github.com/p0deje/Maccy)
+- 소개: macOS용 가볍고 빠른 오픈소스 클립보드 매니저
+- 라이선스: MIT
+- 지원 환경: macOS Sonoma 14 이상
 
-Maccy works on macOS Sonoma 14 or higher.
+## 추가된 기능
 
-<!-- vim-markdown-toc GFM -->
+- 영어 문장을 복사하면 한국어 번역을 추가합니다.
+- 한국어 문장을 복사하면 영어 번역을 추가합니다.
+- 시스템 클립보드는 원문 그대로 유지합니다.
+- 번역 결과는 Maccy 히스토리에 별도 항목으로 들어갑니다.
+- 공부용 번역 기록을 따로 저장합니다.
+- 짧은 텍스트, URL, 파일 경로, 이메일, 코드처럼 보이는 텍스트는 자동으로 건너뜁니다.
 
-* [Features](#features)
-* [Install](#install)
-* [Usage](#usage)
-* [Advanced](#advanced)
-  * [Ignore Copied Items](#ignore-copied-items)
-  * [Ignore Custom Copy Types](#ignore-custom-copy-types)
-  * [Speed up Clipboard Check Interval](#speed-up-clipboard-check-interval)
-* [FAQ](#faq)
-  * [Why doesn't it paste when I select an item in history?](#why-doesnt-it-paste-when-i-select-an-item-in-history)
-  * [When assigning a hotkey to open Maccy, it says that this hotkey is already used in some system setting.](#when-assigning-a-hotkey-to-open-maccy-it-says-that-this-hotkey-is-already-used-in-some-system-setting)
-  * [How to restore hidden footer?](#how-to-restore-hidden-footer)
-  * [How to ignore copies from Universal Clipboard?](#how-to-ignore-copies-from-universal-clipboard)
-  * [My keyboard shortcut stopped working in password fields. How do I fix this?](#my-keyboard-shortcut-stopped-working-in-password-fields-how-do-i-fix-this)
-* [Translations](#translations)
-* [Motivation](#motivation)
-* [License](#license)
+번역에는 DeepSeek API를 사용합니다. 번역 기능은 기본적으로 꺼져 있습니다.
 
-<!-- vim-markdown-toc -->
+## 설치
 
-## Features
+### 빌드된 앱을 받는 경우
 
-* Lightweight and fast
-* Keyboard-first
-* Secure and private
-* Native UI
-* Open source and free
+1. 공유받은 `Maccy.app` 또는 압축 파일을 다운로드합니다.
+2. `Maccy.app`을 `Applications` 폴더로 옮깁니다.
+3. 처음 실행할 때 macOS가 차단하면 앱을 우클릭한 뒤 **Open**을 선택합니다.
+4. 자동 붙여넣기 기능을 쓰려면 다음 권한을 허용합니다.
+   - System Settings → Privacy & Security → Accessibility → Maccy 허용
 
-## Install
+> Homebrew로 `brew install maccy`를 실행하면 원본 Maccy가 설치됩니다. 이 버전의 번역 기능은 포함되지 않습니다.
 
-Download the latest version from the [releases](https://github.com/p0deje/Maccy/releases/latest) page, or use [Homebrew](https://brew.sh/):
+### 직접 빌드하는 경우
 
-```sh
-brew install maccy
-```
+1. Xcode에서 `Maccy.xcodeproj`를 엽니다.
+2. Scheme을 `Maccy`로 선택합니다.
+3. `Run`으로 실행하거나 `Product → Archive`로 앱을 만듭니다.
+4. 빌드된 `Maccy.app`을 실행합니다.
 
-## Usage
+## 번역 설정
 
-1. <kbd>SHIFT (⇧)</kbd> + <kbd>COMMAND (⌘)</kbd> + <kbd>C</kbd> to popup Maccy or click on its icon in the menu bar.
-2. Type what you want to find.
-3. To select the history item you wish to copy, press <kbd>ENTER</kbd>, or click the item, or use <kbd>COMMAND (⌘)</kbd> + `n` shortcut.
-4. To choose the history item and paste, press <kbd>OPTION (⌥)</kbd> + <kbd>ENTER</kbd>, or <kbd>OPTION (⌥)</kbd> + <kbd>CLICK</kbd> the item, or use <kbd>OPTION (⌥)</kbd> + `n` shortcut.
-5. To choose the history item and paste without formatting, press <kbd>OPTION (⌥)</kbd> + <kbd>SHIFT (⇧)</kbd> + <kbd>ENTER</kbd>, or <kbd>OPTION (⌥)</kbd> + <kbd>SHIFT (⇧)</kbd> + <kbd>CLICK</kbd> the item, or use <kbd>OPTION (⌥)</kbd> + <kbd>SHIFT (⇧)</kbd> + `n` shortcut.
-6. To delete the history item, press <kbd>OPTION (⌥)</kbd> + <kbd>DELETE (⌫)</kbd>.
-7. To see the full text of the history item, wait a couple of seconds for tooltip.
-8. To pin the history item so that it remains on top of the list, press <kbd>OPTION (⌥)</kbd> + <kbd>P</kbd>. The item will be moved to the top with a random but permanent keyboard shortcut. To unpin it, press <kbd>OPTION (⌥)</kbd> + <kbd>P</kbd> again.
-9. To clear all unpinned items, select _Clear_ in the menu, or press <kbd>OPTION (⌥)</kbd> + <kbd>COMMAND (⌘)</kbd> + <kbd>DELETE (⌫)</kbd>. To clear all items including pinned, select _Clear_ in the menu with  <kbd>OPTION (⌥)</kbd> pressed, or press <kbd>SHIFT (⇧)</kbd> + <kbd>OPTION (⌥)</kbd> + <kbd>COMMAND (⌘)</kbd> + <kbd>DELETE (⌫)</kbd>.
-10. To disable Maccy and ignore new copies, click on the menu icon with <kbd>OPTION (⌥)</kbd> pressed.
-11. To ignore only the next copy, click on the menu icon with <kbd>OPTION (⌥)</kbd> + <kbd>SHIFT (⇧)</kbd> pressed.
-12. To customize the behavior, check "Preferences…" window, or press <kbd>COMMAND (⌘)</kbd> + <kbd>,</kbd>.
+1. Maccy를 실행합니다.
+2. Preferences를 엽니다. 기본 단축키는 `⌘,` 입니다.
+3. `Advanced` 탭에서 **DeepSeek translation**을 켭니다.
+4. DeepSeek API key를 입력합니다.
+5. 필요하면 모델 이름을 수정합니다. 기본값은 `deepseek-v4-flash`입니다.
 
-## Advanced
+API key는 macOS Keychain에 저장됩니다.
 
-### Ignore Copied Items
+## 사용법
 
-You can tell Maccy to ignore all copied items:
+1. 번역하고 싶은 영어 또는 한국어 문장을 복사합니다.
+2. Maccy가 번역 가능한 문장인지 판단합니다.
+3. 번역이 성공하면 Maccy 히스토리에 번역문이 추가됩니다.
+4. 기본 단축키 `⇧⌘C` 또는 메뉴바 아이콘으로 히스토리를 열어 확인합니다.
+5. Preferences의 `Learning` 탭에서 저장된 번역 기록을 다시 볼 수 있습니다.
 
-```sh
-defaults write org.p0deje.Maccy ignoreEvents true # default is false
-```
+## 주의할 점
 
-This is useful if you have some workflow for copying sensitive data. You can set `ignoreEvents` to true, copy the data and set `ignoreEvents` back to false.
+- 번역 기능을 켜면 번역 대상 텍스트가 DeepSeek API로 전송됩니다.
+- 민감한 문장, 비밀번호, 개인정보는 복사하지 않는 것이 좋습니다.
+- DeepSeek API 사용량에 따라 비용이 발생할 수 있습니다.
+- 번역 품질은 API 응답에 따라 달라질 수 있습니다.
 
-You can also click the menu icon with <kbd>OPTION (⌥)</kbd> pressed. To ignore only the next copy, click with <kbd>OPTION (⌥)</kbd> + <kbd>SHIFT (⇧)</kbd> pressed.
+## 라이선스
 
-### Ignore Custom Copy Types
+이 프로젝트는 원본 Maccy와 동일하게 MIT 라이선스를 따릅니다.
 
-By default Maccy will ignore certain copy types that are considered to be confidential
-or temporary. The default list always include the following types:
-
-* `org.nspasteboard.TransientType`
-* `org.nspasteboard.ConcealedType`
-* `org.nspasteboard.AutoGeneratedType`
-
-Also, default configuration includes the following types but they can be removed
-or overwritten:
-
-* `com.agilebits.onepassword`
-* `com.typeit4me.clipping`
-* `de.petermaurer.TransientPasteboardType`
-* `Pasteboard generator type`
-* `net.antelle.keeweb`
-
-You can add additional custom types using settings.
-To find what custom types are used by an application, you can use
-free application [Pasteboard-Viewer](https://github.com/sindresorhus/Pasteboard-Viewer).
-Simply download the application, open it, copy something from the application you
-want to ignore and look for any custom types in the left sidebar. [Here is an example
-of using this approach to ignore Adobe InDesign](https://github.com/p0deje/Maccy/issues/125).
-
-### Speed up Clipboard Check Interval
-
-By default, Maccy checks clipboard every 500 ms, which should be enough for most users. If you want
-to speed it up, you can change it with `defaults`:
-
-```sh
-defaults write org.p0deje.Maccy clipboardCheckInterval 0.1 # 100 ms
-```
-
-## FAQ
-
-### Why doesn't it paste when I select an item in history?
-
-1. Make sure you have "Paste automatically" enabled in Preferences.
-2. Make sure "Maccy" is added to System Settings -> Privacy & Security -> Accessibility.
-
-### When assigning a hotkey to open Maccy, it says that this hotkey is already used in some system setting.
-
-1. Open System settings -> Keyboard -> Keyboard Shortcuts.
-2. Find where that hotkey is used. For example, "Convert text to simplified Chinese" is under Services -> Text.
-3. Disable that hotkey or remove assigned combination ([screenshot](https://github.com/p0deje/Maccy/assets/576152/446719e6-c3e5-4eb0-95fb-5a811066487f)).
-4. Restart Maccy.
-5. Assign hotkey in Maccy settings.
-
-### How to restore hidden footer?
-
-1. Open Maccy window.
-2. Press <kbd>COMMAND (⌘)</kbd> + <kbd>,</kbd> to open preferences.
-3. Enable footer in Appearance section.
-
-If for some reason it doesn't work, run the following command in Terminal.app:
-
-```sh
-defaults write org.p0deje.Maccy showFooter 1
-```
-
-### How to ignore copies from [Universal Clipboard](https://support.apple.com/en-us/102430)?
-
-1. Open Preferences -> Ignore -> Pasteboard Types.
-2. Add `com.apple.is-remote-clipboard`.
-
-### My keyboard shortcut stopped working in password fields. How do I fix this?
-
-If your shortcut produces a character (like `Option+C` → "ç"), macOS security may block it in password fields. Use [Karabiner-Elements](https://karabiner-elements.pqrs.org/) to remap your shortcut to a different combination like `Cmd+Shift+C`. [See detailed solution](docs/keyboard-shortcut-password-fields.md).
-
-## Translations
-
-The translations are hosted in [Weblate](https://hosted.weblate.org/engage/maccy/).
-You can use it to suggest changes in translations and localize the application to a new language.
-
-[![Translation status](https://hosted.weblate.org/widget/maccy/multi-auto.svg)](https://hosted.weblate.org/engage/maccy/)
-
-## Motivation
-
-There are dozens of similar applications out there, so why build another?
-Over the past years since I moved from Linux to macOS, I struggled to find
-a clipboard manager that is as free and simple as [Parcellite](http://parcellite.sourceforge.net),
-but I couldn't. So I've decided to build one.
-
-Also, I wanted to learn Swift and get acquainted with macOS application development.
-
-
-## License
-
-[MIT](./LICENSE)
+자세한 내용은 [LICENSE](./LICENSE)를 확인하세요.
